@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Construction, OrderItem, Order
+
+admin.site.register(Construction)
+admin.site.register(OrderItem)
+admin.site.register(Order)
