@@ -10,4 +10,4 @@ def construction_list(request):
     context = {
         'construction': Construction.objects.all()
     }
-    return render(request, "construction_list.html", context)
+    return render(request, "home-page.html", context)
