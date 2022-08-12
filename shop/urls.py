@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 
-from .views import home_page, checkout_page, product_page, construction_list
+from .views import home_page, checkout_page, product_page
 
 #app_name = 'shop'
 
