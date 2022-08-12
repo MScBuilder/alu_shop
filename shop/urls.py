@@ -1,11 +1,12 @@
 from django.contrib import admin
 from django.urls import path
 
-from .views import index, construction_list
+from .views import home_page, checkout_page, product_page, construction_list
 
 #app_name = 'shop'
 
 urlpatterns = [
-    path('index', index, name='index'),
-    path('', construction_list, name='construction-list'),
+    path('', home_page),
+    path('checkout_page/', checkout_page),
+    path('product_page/', product_page),
 ]
