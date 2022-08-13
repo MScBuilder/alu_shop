@@ -198,7 +198,7 @@
         <!--Card-->
         <div class="row wow fadeIn">
 
-          {% for construction in constructions %}
+          {% for construction in object_list %}
           <div class="col-lg-3 col-md-6 mb-4">
             <div class="card">
 
@@ -220,7 +220,7 @@
                 </a>
                 <h5>
                   <strong>
-                    <a href="" class="dark-grey-text">{{ construction.title }}
+                    <a href="{{ construction.get_absolute_url }}" class="dark-grey-text">{{ construction.title }}
                       <span class="badge badge-pill {{ construction.get_label_display }}-color">NEW</span>
                     </a>
                   </strong>
