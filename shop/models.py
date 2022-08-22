@@ -21,7 +21,6 @@ LABEL_CHOICES = {
 class Construction(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField()
-    category = models.CharField(max_length=2)
     category = models.CharField(choices=CATEGORY_CHOICES, default="FW", max_length=2)
     label = models.CharField(choices=LABEL_CHOICES, default="P", max_length=1)
     slug = models.SlugField()
@@ -30,7 +29,7 @@ class Construction(models.Model):
         return self.title
     
     def get_absolute_url(self):
-        return reverse('product-page', kwargs={'slug': self.slug})
+        return reverse('core:product_page', kwargs={'slug': self.slug})
     
     
 class OrderItem(models.Model):
