@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
   <!--Carousel Wrapper-->
@@ -9,6 +10,7 @@
       <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
       <li data-target="#carousel-example-1z" data-slide-to="1"></li>
       <li data-target="#carousel-example-1z" data-slide-to="2"></li>
+      <li data-target="#carousel-example-1z" data-slide-to="3"></li>
     </ol>
     <!--/.Indicators-->
 
@@ -17,7 +19,7 @@
 
       <!--First slide-->
       <div class="carousel-item active">
-        <div class="view" style="background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/8-col/img%282%29.jpg'); background-repeat: no-repeat; background-size: cover;">
+        <div class="view" style="background-image: url('{% static 'img/jpg/Aluminium_Sliding_Doors.jpg' %}'); background-repeat: no-repeat; background-size: cover;">
 
           <!-- Mask & flexbox options-->
           <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
@@ -25,17 +27,15 @@
             <!-- Content -->
             <div class="text-center white-text mx-5 wow fadeIn">
               <h1 class="mb-4">
-                <strong>Learn Bootstrap 4 with MDB</strong>
+                <strong> Get FAST quotation for new windows </strong>
               </h1>
 
               <p>
-                <strong>Best & free guide of responsive web design</strong>
+                <strong>You choose what windows you need</strong>
               </p>
 
               <p class="mb-4 d-none d-md-block">
-                <strong>The most comprehensive tutorial for the Bootstrap 4. Loved by over 500 000 users. Video and
-                  written versions
-                  available. Create your own, stunning website.</strong>
+                <strong>Choose window type -> set dimensions -> pick glass type -> choose additional elements -> get quotation! </strong>
               </p>
 
               <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/" class="btn btn-outline-white btn-lg">Start
@@ -54,7 +54,7 @@
 
       <!--Second slide-->
       <div class="carousel-item">
-        <div class="view" style="background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/8-col/img%283%29.jpg'); background-repeat: no-repeat; background-size: cover;">
+        <div class="view" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/New_glass_doors_and_windows_in_storage.jpg/1280px-New_glass_doors_and_windows_in_storage.jpg'); background-repeat: no-repeat; background-size: cover;">
 
           <!-- Mask & flexbox options-->
           <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
@@ -62,17 +62,15 @@
             <!-- Content -->
             <div class="text-center white-text mx-5 wow fadeIn">
               <h1 class="mb-4">
-                <strong>Learn Bootstrap 4 with MDB</strong>
+                <strong> Get FAST quotation for new windows </strong>
               </h1>
 
               <p>
-                <strong>Best & free guide of responsive web design</strong>
+                <strong>You choose what windows you need</strong>
               </p>
 
               <p class="mb-4 d-none d-md-block">
-                <strong>The most comprehensive tutorial for the Bootstrap 4. Loved by over 500 000 users. Video and
-                  written versions
-                  available. Create your own, stunning website.</strong>
+                <strong>Choose window type -> set dimensions -> pick glass type -> choose additional elements -> get quotation! </strong>
               </p>
 
               <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/" class="btn btn-outline-white btn-lg">Start
@@ -91,7 +89,7 @@
 
       <!--Third slide-->
       <div class="carousel-item">
-        <div class="view" style="background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/8-col/img%285%29.jpg'); background-repeat: no-repeat; background-size: cover;">
+        <div class="view" style="background-image: url('{% static 'img/jpg/many-window.jpg' %}'); background-repeat: no-repeat; background-size: cover;">
 
           <!-- Mask & flexbox options-->
           <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
@@ -99,17 +97,15 @@
             <!-- Content -->
             <div class="text-center white-text mx-5 wow fadeIn">
               <h1 class="mb-4">
-                <strong>Learn Bootstrap 4 with MDB</strong>
+                <strong> Get FAST quotation for new windows </strong>
               </h1>
 
               <p>
-                <strong>Best & free guide of responsive web design</strong>
+                <strong>You choose what windows you need</strong>
               </p>
 
               <p class="mb-4 d-none d-md-block">
-                <strong>The most comprehensive tutorial for the Bootstrap 4. Loved by over 500 000 users. Video and
-                  written versions
-                  available. Create your own, stunning website.</strong>
+                <strong>Choose window type -> set dimensions -> pick glass type -> choose additional elements -> get quotation! </strong>
               </p>
 
               <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/" class="btn btn-outline-white btn-lg">Start
@@ -125,6 +121,41 @@
         </div>
       </div>
       <!--/Third slide-->
+
+      <!--Fourth slide-->
+      <div class="carousel-item">
+        <div class="view" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/6a/Gordijnen_aan_venster.JPG'); background-repeat: no-repeat; background-size: cover;">
+
+          <!-- Mask & flexbox options-->
+          <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
+
+            <!-- Content -->
+            <div class="text-center white-text mx-5 wow fadeIn">
+              <h1 class="mb-4">
+                <strong> Get FAST quotation for new windows </strong>
+              </h1>
+
+              <p>
+                <strong>You choose what windows you need</strong>
+              </p>
+
+              <p class="mb-4 d-none d-md-block">
+                <strong>Choose window type -> set dimensions -> pick glass type -> choose additional elements -> get quotation! </strong>
+              </p>
+
+              <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/" class="btn btn-outline-white btn-lg">Start
+                free tutorial
+                <i class="fas fa-graduation-cap ml-2"></i>
+              </a>
+            </div>
+            <!-- Content -->
+
+          </div>
+          <!-- Mask & flexbox options-->
+
+        </div>
+      </div>
+      <!--/Fourth slide-->
 
     </div>
     <!--/.Slides-->
@@ -204,8 +235,16 @@
 
               <!--Card image-->
               <div class="view overlay">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg" class="card-img-top"
+                {% if construction.category == "FW" %}
+                <img src="{% static 'img/jpg/fix.jpg' %}" class="card-img-top"
                   alt="">
+                {% elif construction.category == "CW" %}
+                <img src="{% static 'img/jpg/casement.jpg' %}" class="card-img-top"
+                  alt="">
+                {% elif construction.category == "SW" %}
+                <img src="{% static 'img/jpg/sliding.jpg' %}" class="card-img-top"
+                  alt="">
+                {% endif %}
                 <a href="{{ construction.get_absolute_url }}">
                   <div class="mask rgba-white-slight"></div>
                 </a>
@@ -221,7 +260,17 @@
                 <h5>
                   <strong>
                     <a href="{{ construction.get_absolute_url }}" class="dark-grey-text">{{ construction.title }}
-                      <span class="badge badge-pill {{ construction.get_label_display }}-color">NEW</span>
+                      {% if construction.color == "9016" %}
+                         <span class="badge badge-pill white_9016" > color: {{ construction.color }} </span>
+                      {% elif construction.color == "9006" %}
+                         <span class="badge badge-pill silver_9006" > color: {{ construction.color }} </span>
+                      {% elif construction.color == "9005" %}
+                         <span class="badge badge-pill black_9005" > color: {{ construction.color }} </span>
+                      {% elif construction.color == "8017" %}
+                         <span class="badge badge-pill brown_8017" > color: {{ construction.color }} </span>
+                      {% elif construction.color == "7016" %}
+                         <span class="badge badge-pill antracite_7016"> color: {{ construction.color }} </span>
+                        {% endif %}                 
                     </a>
                   </strong>
                 </h5>
