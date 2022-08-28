@@ -31,7 +31,17 @@ class Construction(models.Model):
     
     def get_absolute_url(self):
         return reverse('core:product_page', kwargs={'slug': self.slug})
+ 
+class Qutation(models.Model):
+    construction = models.ForeignKey(Construction, on_delete=models.CASCADE)
+    #slug = models.SlugField()
     
+    def __str__(self):
+        return self.item.title
+    
+    def get_absolute_url(self):
+        return reverse('core:quotation_page')
+     
     
 class OrderItem(models.Model):
     item = models.ForeignKey(Construction, on_delete=models.CASCADE)

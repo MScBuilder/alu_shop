@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!--Main layout-->
+<main class="header_space">
+    <div class="container">
+
+      <!--Navbar-->
+      <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5">
+
+        <!-- Navbar brand -->
+        <span class="navbar-brand"></span>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link new_const_butt" href="#">+ NEW CONSTRUCTION
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item opt_butt">
+                <select class="custom-select d-block w-100" id="state" required="">
+                    <option>WHITE - RAL:9016</option>
+                    <option>SILVER - RAL:9006</option>
+                    <option>BLACK - RAL:9005</option>
+                    <option>BROWN - RAL:8017</option>
+                    <option>ANTRACIT - RAL:7016</option>
+                  </select>
+            </li>
+            <li class="nav-item opt_butt">
+                <select class="custom-select d-block w-100" id="state" required="">
+                    <optgroup label="Double glass">
+                        <option>U=1,0W/m2K</option>
+                        <option>U=1,1W/m2K</option>
+                    </optgroup>
+                    <optgroup label="Triple glass">
+                        <option>U=0,6W/m2K</option>
+                        <option>U=0,5W/m2K</option>
+                    </optgroup>
+                </select>
+            </li>
+
+          </ul>
+        </div>
+        <!-- Collapsible content -->
+
+      </nav>
+      <!--/.Navbar-->
+
+      <!--Section: Products v.3-->
+      <section class="text-center mb-4">
+        <!--Card-->
+        <div class="row wow fadeIn">
+
+          {% for construction in object_list %}
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card">
+
+              <!--Card image-->
+              <div class="view overlay">
+                {% if construction.category == "FW" %}
+                <img src="{% static 'img/jpg/fix.jpg' %}" class="card-img-top" alt="">
+                {% elif construction.category == "CW" %}
+                <img src="{% static 'img/jpg/casement.jpg' %}" class="card-img-top" alt="">
+                {% elif construction.category == "SW" %}
+                <img src="{% static 'img/jpg/sliding.jpg' %}" class="card-img-top" alt="">
+                {% endif %}
+                <a href="{{ construction.get_absolute_url }}">
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+              <!--Card image-->
+
+              <!--Card content-->
+              <div class="card-body text-center">
+                <!--Category & Title-->
+                <a href="{{ construction.get_absolute_url }}"  class="grey-text">
+                  <h2>{{ construction.title }}</h2>
+                </a>
+                <h5>
+                  <strong>
+                    <a href="{{ construction.get_absolute_url }}" class="dark-grey-text">
+                      {% if construction.color == "9016" %}
+                         <span class="badge badge-pill white_9016" > Color: {{ construction.color }} </span>
+                      {% elif construction.color == "9006" %}
+                         <span class="badge badge-pill silver_9006" > Color: {{ construction.color }} </span>
+                      {% elif construction.color == "9005" %}
+                         <span class="badge badge-pill black_9005" > Color: {{ construction.color }} </span>
+                      {% elif construction.color == "8017" %}
+                         <span class="badge badge-pill brown_8017" > Color: {{ construction.color }} </span>
+                      {% elif construction.color == "7016" %}
+                         <span class="badge badge-pill antracite_7016"> Color: {{ construction.color }} </span>
+                        {% endif %}                 
+                    </a>
+                  </strong>
+                </h5>
+
+                <h4 class="font-weight-bold blue-text">
+                  <strong>${{ construction.price }}</strong>
+                </h4>
+
+              </div>
+              <!--Card content-->
+
+            </div> 
+          </div>
+          {% endfor %}
+
+        </div>
+        <!--Card-->
+
+      </section>
+      <!--Section: Products v.3-->
+
+      <!--Pagination-->
+      <nav class="d-flex justify-content-center wow fadeIn">
+        <ul class="pagination pg-blue">
+
+          <!--Arrow left-->
+          <li class="page-item disabled">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+
+          <li class="page-item active">
+            <a class="page-link" href="#">1
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">2</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">3</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">4</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">5</a>
+          </li>
+
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!--Pagination-->
+
+    </div>
+</main>
+<!--Main layout-->
+{% endblock content %}
