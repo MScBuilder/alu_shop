@@ -1,0 +1,53 @@
+{% load static %}
+
+<div class="col-lg-3 col-md-6 mb-4">
+    <div class="card">
+
+      <!--Card image-->
+      <div class="view overlay">
+        {% if construction.category == "FW" %}
+        <img src="{% static 'img/jpg/fix.jpg' %}" class="card-img-top" alt="">
+        {% elif construction.category == "CW" %}
+        <img src="{% static 'img/jpg/casement.jpg' %}" class="card-img-top" alt="">
+        {% elif construction.category == "SW" %}
+        <img src="{% static 'img/jpg/sliding.jpg' %}" class="card-img-top" alt="">
+        {% endif %}
+        <a href="{{ construction.get_absolute_url }}">
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+      <!--Card image-->
+
+      <!--Card content-->
+      <div class="card-body text-center">
+        <!--Category & Title-->
+        <a href="{{ construction.get_absolute_url }}"  class="grey-text">
+          <h2>{{ construction.reference_name }}</h2>
+        </a>
+        <h5>
+          <strong>
+            <a href="{{ construction.get_absolute_url }}" class="dark-grey-text">
+              {% if construction.color == "9016" %}
+                 <span class="badge badge-pill white_9016" > Color: {{ construction.color }} </span>
+              {% elif construction.color == "9006" %}
+                 <span class="badge badge-pill silver_9006" > Color: {{ construction.color }} </span>
+              {% elif construction.color == "9005" %}
+                 <span class="badge badge-pill black_9005" > Color: {{ construction.color }} </span>
+              {% elif construction.color == "8017" %}
+                 <span class="badge badge-pill brown_8017" > Color: {{ construction.color }} </span>
+              {% elif construction.color == "7016" %}
+                 <span class="badge badge-pill antracite_7016"> Color: {{ construction.color }} </span>
+                {% endif %}                 
+            </a>
+          </strong>
+        </h5>
+
+        <h4 class="font-weight-bold blue-text">
+          <strong>${{ construction.price }}</strong>
+        </h4>
+
+      </div>
+      <!--Card content-->
+
+    </div> 
+</div>

@@ -62,7 +62,7 @@ ROOT_URLCONF = 'alu_shop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'templates/partial_templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
