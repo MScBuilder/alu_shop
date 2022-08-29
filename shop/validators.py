@@ -1,22 +1,16 @@
-from email import message
-from unicodedata import category
 from django.core.exceptions import ValidationError
-from django.core.validators import BaseValidator
-from django.utils.deconstruct import deconstructible
-from django.utils.translation import gettext_lazy as _
+import shop.aluminium_system_info.size_restrictions as alu_info
 
 
-@deconstructible
-class MaxWidthValidator(BaseValidator):
-    def __init__(self, limit_value, message=None, cat=None):
-        self.limit_value = limit_value
-        if cat:
-            self.cat = cat
-        if message:
-            self.message = message
 
-    message = _("Ensure this value is less than or equal to %(limit_value)s.")
-    code = "max_value"
+def width_validator(value):
+    if value >= alu_info.FIX_MIN_WIDTH and value <= alu_info.FIX_MAX_WIDTH:
+        return value
+    else:
+        raise ValidationError(f"Width of the FIX windows should be between {alu_info.FIX_MIN_WIDTH} and {alu_info.FIX_MAX_WIDTH} ")
 
-    def compare(self, a, b ):
-        return a > b
+def height_validator(value):
+    if value >= alu_info.FIX_MIN_HEIGHT and value <= alu_info.FIX_MAX_HEIGHT:
+        return value
+    else:
+        raise ValidationError(f"Width of the FIX windows should be between {alu_info.FIX_MIN_HEIGHT} and {alu_info.FIX_MAX_HEIGHT} ")

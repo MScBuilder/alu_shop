@@ -1,51 +1,18 @@
-from statistics import mode
-from tkinter import CASCADE
-from django.core.validators import MaxValueValidator, MinValueValidator
 from django.shortcuts import reverse
 from django.conf import settings
 from django.db import models
-from .validators import MaxWidthValidator
-
-CATEGORY_CHOICES = {
-    ('FW', 'Fix window'),
-    ('CW', 'Casement window'),
-    ('SW', 'Sliding window'),
-}
-
-COLOR_CHOICES = {
-    ('9016', 'White'),
-    ('9006', 'Silver'),
-    ('9005', 'Black'),
-    ('8017', 'Brown'),
-    ('7016', 'Antracite')
-}
-
-FIX_MAX_WIDTH: int = 2500
-FIX_MIX_WIDTH: int = 300
-FIX_MAX_HEIGHT: int= 3500
-FIX_MIN_HEIGHT: int = 300
-
-CASEMENT_MAX_WIDTH: int = 2500
-CASEMENT_MIX_WIDTH: int = 1000
-CASEMENT_MAX_HEIGHT: int = 2300
-CASEMENT_MIN_HEIGHT: int = 800
-
-SLIDE_MAX_WIDTH: int = 4000
-SLIDE_MIX_WIDTH: int = 1200
-SLIDE_MAX_HEIGHT: int = 2500
-SLIDE_MIN_HEIGHT: int = 1200
+from .validators import width_validator, height_validator
+from shop.aluminium_system_info.color_options import COLOR_CHOICES
+from shop.aluminium_system_info.category_options import CATEGORY_CHOICES
 
 
 class Construction(models.Model):
     category = models.CharField(choices=CATEGORY_CHOICES, default="CW", max_length=2)
     title = models.CharField(max_length=100)
     width = models.PositiveIntegerField(default=1000, 
-                                        validators=[MaxWidthValidator(FIX_MAX_WIDTH, "you are stupid", "CW")])
+                                        validators=[width_validator])
     height = models.PositiveIntegerField(default=1000, 
-                                        validators=[
-                                                MaxValueValidator(3000),
-                                                MinValueValidator(350)
-                                            ])
+                                        validators=[height_validator])
     price = models.FloatField()
     color = models.CharField(choices=COLOR_CHOICES, default="9016", max_length=4)
     slug = models.SlugField(max_length=200)
