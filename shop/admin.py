@@ -2,6 +2,10 @@ from django.contrib import admin
 
 from .models import Construction, OrderItem, Order
 
-admin.site.register(Construction)
+class ConstructionAdmin(admin.ModelAdmin):
+    list_display = ['category', 'reference_name', 'width' , 'height', 'color']
+    prepopulated_fields = {"slug": ("reference_name", "width", "height")}
+
+admin.site.register(Construction, ConstructionAdmin)
 admin.site.register(OrderItem)
 admin.site.register(Order)
