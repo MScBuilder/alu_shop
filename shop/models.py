@@ -21,7 +21,7 @@ class Construction(models.Model):
         return self.reference_name
     
     def get_absolute_url(self):
-        return reverse('core:product_page', kwargs={'slug': self.slug})
+        return reverse('core:new_construction', kwargs={'slug': self.slug})
     
     
 class OrderItem(models.Model):
