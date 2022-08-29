@@ -4,6 +4,8 @@ from django.shortcuts import reverse
 from django.conf import settings
 from django.db import models
 
+import aluminium_system_info.size_restrictions
+
 CATEGORY_CHOICES = {
     ('FW', 'Fix window'),
     ('CW', 'Casement window'),
