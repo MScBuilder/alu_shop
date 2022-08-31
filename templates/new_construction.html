@@ -33,13 +33,11 @@
             </div>
           </div>
           <!--Content-->
-          <form class="justify-content-left">
+          <form class="justify-content-left" action="."  method="PUT">
             <!-- Default input --> 
+            {% csrf_token %}
             {{form.as_p}}
-            <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
-              <i class="fas fa-shopping-cart ml-1"></i>
-            </button>
-
+            <button class="btn btn-primary btn-md my-0 p" type="submit">Save changes</button>
           </form>
         </div>
         <!--Grid column-->
