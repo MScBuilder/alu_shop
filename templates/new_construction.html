@@ -28,26 +28,14 @@
 
           <!--Content-->
           <div class="p-4">
-
             <div class="mb-3">
-                <h1> {{ construction.reference_name }} </h1>
+                <h4> Provide informations about a new construction </h4>
             </div>
-
-            <p class="lead">
-              <span>${{ object.price }}</span>
-            </p>
-
-            <p class="lead font-weight-bold">Description</p>
-
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dolor suscipit libero eos atque quia ipsa
-              sint voluptatibus!
-              Beatae sit assumenda asperiores iure at maxime atque repellendus maiores quia sapiente.</p>
           </div>
           <!--Content-->
-          <form class="d-flex justify-content-left">
+          <form class="justify-content-left">
             <!-- Default input --> 
-            {{form}}
-            <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
+            {{form.as_p}}
             <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
               <i class="fas fa-shopping-cart ml-1"></i>
             </button>
