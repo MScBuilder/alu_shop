@@ -19,6 +19,15 @@ class ConstructionDetailView(DetailView):
 class QuotationView(ListView):
     model = Construction
     template_name = 'quotation_page.html'
+    paginate_by = 8
+
+class QuotationCategoryView(ListView):
+    model = Construction
+    template_name = 'quotation_page.html'
+    paginate_by = 8
+
+    def get_queryset(self, *args, **kwargs):
+        return Construction.objects.filter(category__icontains = self.kwargs.get('category'))
 
 #Function type View insted of ListView
 #def quotation_page(request):
@@ -27,6 +36,7 @@ class QuotationView(ListView):
 #    return render (request, 'quotation_page.html', context)
 
 class ConstructionFormView(FormView):
+    model = Construction
     template_name = 'update_construction.html'
     form_class = ConstructionForm
     success_url = '/quotation_page/'

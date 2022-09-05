@@ -25,19 +25,16 @@
 
         <!--Grid column-->
         <div class="col-md-6 mb-4">
-
-          <!--Content-->
-          <div class="p-4">
-            <div class="mb-3">
-                <h4> Provide informations about a new construction </h4>
-            </div>
-          </div>
           <!--Content-->
           <form class="justify-content-left" action="."  method="PUT">
             <!-- Default input --> 
             {% csrf_token %}
             {{form.as_p}}
-            <button class="btn btn-primary btn-md my-0 p" type="submit">Save changes</button>
+            <button class="btn btn-primary btn-md my-0 p" type="submit">
+              <h4 class="font-weight-bold mb-0">
+                Save changes
+              </h4>
+            </button>
           </form>
         </div>
         <!--Grid column-->

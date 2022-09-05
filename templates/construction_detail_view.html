@@ -24,14 +24,24 @@
         <!--Grid column-->
 
         <!--Grid column-->
-        <div class="col-md-6 mb-4 d-flex" >
+        <div class="col-md-6 mb-4">
           <!--Content-->
-          <div class="p-4 h-100 d-flex">
-            <div class="align-self-start">
-              <h4> Details about this construction </h4>
+          <div class="p-4 h-100">
+            <div >
+              <h1> Details: </h1>
+              <ul>
+                <li><h3>Reference: "{{construction.reference_name}}"</h3></li>
+                <li><h3> Widht: {{construction.width}} mm </h3></li>
+                <li><h3> Height: {{construction.height}} mm </h3></li>
+                <li><h3> Color: {{construction.color}} </h3></li>
+              </ul>
             </div>          
-            <div class="align-self-end">
-              <h4> Details about this construction </h4>
+            <div >
+              <a href="{{ construction.get_absolute_url }}" class="btn btn-lg btn-danger">
+                <h4 class="mb-0 font-weight-bold">
+                  UPDATE
+                </h4>
+              </a>
             </div>
           </div>
           <!--Content-->
