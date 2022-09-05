@@ -1,6 +1,7 @@
 from django.shortcuts import reverse
 from django.conf import settings
 from django.db import models
+from django.template.defaultfilters import slugify
 from .validators import width_validator, height_validator
 from shop.aluminium_system_info.color_options import COLOR_CHOICES
 from shop.aluminium_system_info.category_options import CATEGORY_CHOICES
@@ -25,7 +26,12 @@ class Construction(models.Model):
         
     def get_slug_url(self):
         return reverse('core:construction_detail_view', kwargs={'slug': self.slug})
-    
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            fields_to_slug = self.reference_name + "-" + str(self.width) + "-" + str(self.height)
+            self.slug = slugify(fields_to_slug)
+            return super().save(*args, **kwargs)
     
 class OrderItem(models.Model):
     item = models.ForeignKey(Construction, on_delete=models.CASCADE)
