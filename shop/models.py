@@ -3,6 +3,7 @@ from django.conf import settings
 from django.db import models
 from django.template.defaultfilters import slugify
 from .validators import width_validator, height_validator
+from .aluminium_system_info.price_calculations import calculate_price
 from shop.aluminium_system_info.color_options import COLOR_CHOICES
 from shop.aluminium_system_info.category_options import CATEGORY_CHOICES
 
@@ -14,7 +15,7 @@ class Construction(models.Model):
                                         validators=[width_validator])
     height = models.PositiveIntegerField(default=1000, 
                                         validators=[height_validator])
-    price = models.FloatField()
+    price = models.FloatField(null=True)
     color = models.CharField(choices=COLOR_CHOICES, default="9016", max_length=4)
     slug = models.SlugField(null=True)
     
@@ -28,10 +29,15 @@ class Construction(models.Model):
         return reverse('core:construction_detail_view', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
+        
+        if not self.price:
+            self.price = calculate_price(self)
+        
         if not self.slug:
             fields_to_slug = self.reference_name + "-" + str(self.width) + "-" + str(self.height)
             self.slug = slugify(fields_to_slug)
-            return super().save(*args, **kwargs)
+        return super().save(*args, **kwargs)
+
     
 class OrderItem(models.Model):
     item = models.ForeignKey(Construction, on_delete=models.CASCADE)

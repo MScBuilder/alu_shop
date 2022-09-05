@@ -6,7 +6,7 @@ from . import models
 class ConstructionForm(forms.ModelForm):
     class Meta:
         model = models.Construction
-        fields = ('category', 'reference_name', 'width', 'height', 'color', 'price' )
+        fields = ('category', 'reference_name', 'width', 'height', 'color' )
         
         labels = {
             'category': "CATEGORY",
@@ -14,7 +14,7 @@ class ConstructionForm(forms.ModelForm):
             'width': "WIDTH",
             'height': "HEIGHT",
             'color': "COLOR",
-            'price': "PRICE",
+            #'price': "PRICE",
         }
 
         widgets = {
@@ -23,5 +23,5 @@ class ConstructionForm(forms.ModelForm):
             'width': forms.NumberInput(attrs={'class': 'form-control '}),
             'height': forms.NumberInput(attrs={'class': 'form-control '}),
             'color': forms.Select(attrs={'class': 'form-control '}),
-            'price': forms.NumberInput(attrs={'class': 'form-control'})
+            #'price': forms.NumberInput(attrs={'class': 'form-control'})
         }
