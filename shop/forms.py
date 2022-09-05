@@ -18,10 +18,10 @@ class ConstructionForm(forms.ModelForm):
         }
 
         widgets = {
-            'category': forms.TextInput(attrs={'class': 'form-control container-sm'}),
-            'reference_name': forms.TextInput(attrs={'class': 'form-control container-sm'}),
-            'width': forms.NumberInput(attrs={'class': 'form-control container-sm'}),
-            'height': forms.NumberInput(attrs={'class': 'form-control container-sm'}),
-            'color': forms.TextInput(attrs={'class': 'form-control container-sm'}),
-            'price': forms.NumberInput(attrs={'class': 'form-control container-sm'})
+            'category': forms.Select(attrs={'class': 'form-control '}),
+            'reference_name': forms.TextInput(attrs={'class': 'form-control '}),
+            'width': forms.NumberInput(attrs={'class': 'form-control '}),
+            'height': forms.NumberInput(attrs={'class': 'form-control '}),
+            'color': forms.Select(attrs={'class': 'form-control '}),
+            'price': forms.NumberInput(attrs={'class': 'form-control'})
         }

@@ -15,14 +15,16 @@ class Construction(models.Model):
                                         validators=[height_validator])
     price = models.FloatField()
     color = models.CharField(choices=COLOR_CHOICES, default="9016", max_length=4)
-    #slug = models.SlugField(max_length=200)
+    slug = models.SlugField(null=True)
     
     def __str__(self):
         return self.reference_name
     
     def get_absolute_url(self):
-        return reverse('core:new_construction', args=[str(self.id)])
-        #return reverse('core:new_construction', kwargs={'slug': self.slug})
+        return reverse('core:update_construction', args=[str(self.id)])
+        
+    def get_slug_url(self):
+        return reverse('core:construction_detail_view', kwargs={'slug': self.slug})
     
     
 class OrderItem(models.Model):

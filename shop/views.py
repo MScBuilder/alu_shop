@@ -1,5 +1,7 @@
+import re
+from tkinter.tix import Form
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, TemplateView, FormView
+from django.views.generic import ListView, DetailView, TemplateView, CreateView, FormView, DetailView
 
 from django.http import HttpResponseRedirect
 from shop.models import Construction
@@ -7,20 +9,31 @@ from shop.forms import ConstructionForm
 
 class HomeView(TemplateView):
     template_name = 'home_page.html'
-    
+
+
+class ConstructionDetailView(DetailView):
+    model = Construction
+    template_name = 'construction_detail_view.html'
+
+     
 class QuotationView(ListView):
     model = Construction
     template_name = 'quotation_page.html'
 
+#Function type View insted of ListView
 #def quotation_page(request):
 #    construction_list = Construction.objects.all()
 #    context = {"construction_list": construction_list}
 #    return render (request, 'quotation_page.html', context)
 
 class ConstructionFormView(FormView):
-    template_name = 'new_construction.html'
+    template_name = 'update_construction.html'
     form_class = ConstructionForm
     success_url = '/quotation_page/'
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
 
 def construction_create(request):
     submitted = False
