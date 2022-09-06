@@ -1,7 +1,5 @@
-import re
-from tkinter.tix import Form
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, TemplateView, CreateView, FormView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView, FormView, DetailView
 
 from django.http import HttpResponseRedirect
 from shop.models import Construction
