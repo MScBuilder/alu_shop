@@ -38,19 +38,13 @@ class Construction(models.Model):
             self.slug = slugify(fields_to_slug)
         return super().save(*args, **kwargs)
 
-    
-class OrderItem(models.Model):
-    item = models.ForeignKey(Construction, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.item.reference_name
-
-class Order(models.Model):
+class Project(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    items = models.ManyToManyField(OrderItem)
-    start_date = models.DateTimeField(auto_now_add=True)
-    ordered_date = models.DateTimeField()
-    ordered = models.BooleanField(default=False)
+    proj_name = models.CharField(max_length=100)
+    constructions = models.ManyToManyField(Construction)
+    price = models.FloatField(null=True)
+    slug = models.SlugField(null=True)
     
     def __str__(self):
         return self.user.username
