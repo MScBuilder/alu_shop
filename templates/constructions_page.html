@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!--Main layout-->
+<main class="header_space">
+    <div class="container">
+
+      <!--Navbar-->
+      <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5">
+
+        <!-- Navbar brand -->
+        <span class="navbar-brand"></span>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a href="/projects_page">
+                <button class="btn btn-info mr-2 p-2" href="/projects_page">
+                  <h7 class="font-weight-bold">&#8592; Back to Projects</h7>
+                </button>
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a href="/create_construction">
+                <button class="btn btn-danger mr-2 p-2" type="button" >
+                  <h7 class="font-weight-bold">+ NEW CONSTRUCTION</h7>
+                </button>
+              </a>
+            </li>
+            <li class="nav-item opt_butt">
+                <div class="dropdown">
+                  <button class="btn btn-primary dropdown-toggle m-0 p-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <h7 class="font-weight-bold">Filetr by category</h7>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{% construction.get_proj_url %}/">ALL</a>
+                    <a class="dropdown-item" href="/constructions_page/{{ get_proj_url }}/FW">Fix windows</a>
+                    <a class="dropdown-item" href="/constructions_page/{{ get_proj_url }}/CW">Casment windows</a>
+                    <a class="dropdown-item" href="/constructions_page/{{ get_proj_url }}/SW">Sliding windows</a>
+                  </div>
+                </div>
+            </li>
+            <li class="nav-item opt_butt ">
+                <select class="custom-select d-block w-100" id="state" required="">
+                    <optgroup label="Double glass">
+                        <option>U=1,0W/m2K</option>
+                        <option>U=1,1W/m2K</option>
+                    </optgroup>
+                    <optgroup label="Triple glass">
+                        <option>U=0,6W/m2K</option>
+                        <option>U=0,5W/m2K</option>
+                    </optgroup>
+                </select>
+            </li>
+
+          </ul>
+        </div>
+        <!-- Collapsible content -->
+
+      </nav>
+      <!--/.Navbar-->
+
+      <!--Section: Products v.3-->
+      <section class="text-center mb-4">
+        <!--Card-->
+        <div class="row wow fadeIn">
+
+          {% for construction in construction_list %}
+
+            {% include "construction_card.html" %}
+
+          {% endfor %}
+
+        </div>
+        <!--Card-->
+
+      </section>
+      <!--Pagination-->
+      <nav class="d-flex justify-content-center wow fadeIn">
+        <span class="step-lints">
+
+          {% if page_obj.has_previous %}
+          <a href="?page=1">&laquo;
+            <div class="btn btn-info btn-sm m-0 pt-0 pb-0 pl-2 pr-2">
+              first
+            </div>
+          </a>
+          <a href="?page={{ page_obj.previous_page_number }}">
+            <div class="btn btn-info btn-sm m-0 pt-0 pb-0 pl-2 pr-2">
+              previous
+            </div>
+          </a>
+          {% endif %}
+
+            <span class="current">
+              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+          {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}"> 
+            <div class="btn btn-info btn-sm m-0 pt-0 pb-0 pl-2 pr-2">
+              next
+            </div>
+          </a>
+          <a href="?page={{ page_obj.paginator.num_pages }}">
+            <div class="btn btn-info btn-sm m-0 pt-0 pb-0 pl-2 pr-2">
+              last
+            </div>
+            &raquo;
+          </a>
+          {% endif %}  
+
+        </span>
+      </nav>
+      <!--Pagination-->
+    </div>
+</main>
+<!--Main layout-->
+{% endblock content %}s

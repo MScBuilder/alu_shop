@@ -6,22 +6,37 @@ from . import models
 class ConstructionForm(forms.ModelForm):
     class Meta:
         model = models.Construction
-        fields = ('category', 'reference_name', 'width', 'height', 'color' )
+        fields = ('project_name', 'category', 'reference_name', 'width', 'height', 'color' )
         
         labels = {
+            'project_name': "PROJECT",
             'category': "CATEGORY",
             'reference_name': "REFERENCE",
             'width': "WIDTH",
             'height': "HEIGHT",
             'color': "COLOR",
-            #'price': "PRICE",
         }
 
         widgets = {
+            'project_name': forms.Select(attrs={'class': 'form-control '}),
             'category': forms.Select(attrs={'class': 'form-control '}),
             'reference_name': forms.TextInput(attrs={'class': 'form-control '}),
             'width': forms.NumberInput(attrs={'class': 'form-control '}),
             'height': forms.NumberInput(attrs={'class': 'form-control '}),
             'color': forms.Select(attrs={'class': 'form-control '}),
-            #'price': forms.NumberInput(attrs={'class': 'form-control'})
+        }
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = models.Project
+        fields = ('user', 'name')
+        
+        labels = {
+            'user': "USER",
+            'name': "PROJECT REFERENCE NAME",
+        }
+
+        widgets = {
+            'user': forms.Select(attrs={'class': 'form-control '}),
+            'name': forms.TextInput(attrs={'class': 'form-control '}),
         }
