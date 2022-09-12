@@ -22,6 +22,9 @@ class Project(models.Model):
         
     def get_name_url(self):
         return reverse('core:constructions_page', kwargs={'slug': self.name})
+    
+    def get_absolute_url(self):
+        return reverse ('core:constructions_page', kwargs={'slug': self.name})
 
 
 class Construction(models.Model):

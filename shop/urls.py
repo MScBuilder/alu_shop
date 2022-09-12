@@ -9,14 +9,15 @@ from .views import (
     ConstructionsCategoryView, 
     ConstructionFormView,
     ConstructionDetailView,
-    ProjectsView
+    ProjectsView,
+    CreateProjectView
 )
 
 app_name = 'core'
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
-    path('create_project/', project_create),
+    path('create_project/', CreateProjectView.as_view(), name='create_project'),
     path('projects_page/', ProjectsView.as_view(), name='projects_page'),
     path('create_construction/', construction_create),
     path('constructions_page/<slug>', ConstructionsView.as_view(), name='constructions_page'),

@@ -8,21 +8,20 @@
 <div class="container pt-5">
     <center >
         <h1 class="pt-5">Create new construction</h1>
-        {% if submitted %}
-        
-            New construction created successfully!
-
-        {% else %}
 
         <form action="."  method="POST">
+            {% for hidden_field in form.hidden_fields %}
+                {{ hidden_field.errors }}
+                {{ hidden_field }}
+            {% endfor %}
+
             {% csrf_token %}
-            
+
             {{ form.as_p }}
             
             <button type="submit" class="btn btn-primary btn-lg fw-bold fs-2" > Submit </button>
         </form>
         
-        {% endif %}
 
     </center>
 </div>

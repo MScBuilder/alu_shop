@@ -39,12 +39,19 @@
         <!--Card-->
         <div class="row wow fadeIn">
 
-          {% for project in project_list %}
+          {% if project_list %}
 
-            {% include "project_card.html" %}
+            {% for project in project_list %}
 
-          {% endfor %}
+              {% include "project_card.html" %}
 
+            {% endfor %}
+
+          {% else %}
+
+            <p>You have no projects! Create one...</p>
+
+          {% endif %}
         </div>
         <!--Card-->
 

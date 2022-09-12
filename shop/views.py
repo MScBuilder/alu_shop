@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, TemplateView, FormView, DetailView
-
+from django.views.generic import ListView, DetailView, TemplateView, FormView, DetailView, CreateView
 from django.http import HttpResponseRedirect
+from django.contrib import messages
+
 from shop.models import Construction, Project
 from shop.forms import ConstructionForm, ProjectForm
 
@@ -33,12 +34,6 @@ class ConstructionsCategoryView(ListView):
         query_set = Construction.objects.filter(project_name__name__icontains = self.kwargs.get('slug')).filter(category__icontains = self.kwargs.get('category'))
         return query_set
 
-
-class ProjectsView(ListView):
-    model = Project
-    template_name = 'projects_page.html'
-    paginate_by = 8
-
 class ConstructionFormView(FormView):
     model = Construction
     template_name = 'update_construction.html'
@@ -49,21 +44,25 @@ class ConstructionFormView(FormView):
         form.save()
         return super().form_valid(form)
 
+class ProjectsView(ListView):
+    model = Project
+    template_name = 'projects_page.html'
+    paginate_by = 8
 
-def project_create(request):
-    submitted = False
-    if request.method == "POST":
-        form = ProjectForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/create_project?submitted=True')
-    else:
-        form = ProjectForm
-        if 'submitted' in request.GET:
-            submitted = True
 
-    context = {"form" : form, 'submitted':submitted}     
-    return render (request, 'create_project.html', context=context, )
+class CreateProjectView(CreateView):
+    model = Project
+    template_name = 'create_project.html'
+    fields = ['user', 'name']
+    #success_url = '/projects_page/'
+
+    def form_valid(self, form):
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            'The project has been created'
+        )
+        return super().form_valid(form)
 
 
 def construction_create(request):
