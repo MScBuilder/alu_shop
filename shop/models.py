@@ -17,15 +17,15 @@ class Project(models.Model):
     def __str__(self):
         return self.name
     
-    def get_absolute_url(self):
+    def get_update_url(self):
         return reverse('core:update_project', args=[str(self.id)])
         
-    def get_slug_url(self):
-        return reverse('core:constructions_page', kwargs={'slug': self.slug})
+    def get_name_url(self):
+        return reverse('core:constructions_page', kwargs={'slug': self.name})
 
 
 class Construction(models.Model):
-    project_name = models.ForeignKey(Project, on_delete=models.CASCADE, null=False)
+    project_name = models.ForeignKey('Project', on_delete=models.CASCADE, null=False)
     category = models.CharField(choices=CATEGORY_CHOICES, default="FW", max_length=2)
     reference_name = models.CharField(max_length=100)
     width = models.PositiveIntegerField(default=1000, validators=[width_validator])

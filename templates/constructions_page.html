@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% block title %}Constructions{% endblock %}
+
 {% load static %}
 
 {% block content %}
@@ -43,24 +45,25 @@
                     <h7 class="font-weight-bold">Filetr by category</h7>
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="{{ construction.get_proj_url }}/">ALL</a>
-                    <a class="dropdown-item" href="/constructions_page/{{ get_proj_url }}/FW">Fix windows</a>
-                    <a class="dropdown-item" href="/constructions_page/{{ get_proj_url }}/CW">Casment windows</a>
-                    <a class="dropdown-item" href="/constructions_page/{{ get_proj_url }}/SW">Sliding windows</a>
+                    <a class="dropdown-item" href="">ALL</a>
+                    <a class="dropdown-item" href="/constructions_page//FW">Fix windows</a>
+                    <a class="dropdown-item" href="/constructions_page//CW">Casment windows</a>
+                    <a class="dropdown-item" href="/constructions_page//SW">Sliding windows</a>
                   </div>
                 </div>
             </li>
-            <li class="nav-item opt_butt ">
-                <select class="custom-select d-block w-100" id="state" required="">
-                    <optgroup label="Double glass">
-                        <option>U=1,0W/m2K</option>
-                        <option>U=1,1W/m2K</option>
-                    </optgroup>
-                    <optgroup label="Triple glass">
-                        <option>U=0,6W/m2K</option>
-                        <option>U=0,5W/m2K</option>
-                    </optgroup>
-                </select>
+            <li class="nav-item dropdown ">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Glass
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">U=1,0W/m2K</a></li>
+                <li><a class="dropdown-item" href="#">U=1,1W/m2K</a></li>
+                <li><a class="dropdown-item" href="#">U=0,6W/m2K</a></li>
+                <li><a class="dropdown-item" href="#">U=0,5W/m2K</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">All</a></li>
+              </ul>
             </li>
 
           </ul>

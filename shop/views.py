@@ -20,8 +20,9 @@ class ConstructionsView(ListView):
     paginate_by = 8
 
     def get_queryset(self, *args, **kwargs):
-        return Construction.objects.filter(project_name__name__icontains = self.kwargs.get('slug'))
-    
+        query_set = Construction.objects.filter(project_name__name__icontains = self.kwargs.get('slug'))
+        return query_set
+
 
 class ConstructionsCategoryView(ListView):
     model = Construction
@@ -29,7 +30,9 @@ class ConstructionsCategoryView(ListView):
     paginate_by = 8
 
     def get_queryset(self, *args, **kwargs):
-        return Construction.objects.filter(category__icontains = self.kwargs.get('category'))
+        query_set = Construction.objects.filter(project_name__name__icontains = self.kwargs.get('slug')).filter(category__icontains = self.kwargs.get('category'))
+        return query_set
+
 
 class ProjectsView(ListView):
     model = Project
