@@ -24,11 +24,11 @@ class Project(models.Model):
         return reverse('core:constructions_page', kwargs={'slug': self.name})
     
     def get_absolute_url(self):
-        return reverse ('core:constructions_page', kwargs={'slug': self.name})
+        return reverse ('core:project_detail', kwargs={'pk': self.pk})
 
 
 class Construction(models.Model):
-    project_name = models.ForeignKey('Project', on_delete=models.CASCADE, null=False)
+    project = models.ForeignKey('Project', on_delete=models.CASCADE, null=False, related_name='construction_project')
     category = models.CharField(choices=CATEGORY_CHOICES, default="FW", max_length=2)
     reference_name = models.CharField(max_length=100)
     width = models.PositiveIntegerField(default=1000, validators=[width_validator])
@@ -47,7 +47,7 @@ class Construction(models.Model):
         return reverse('core:construction_detail_view', kwargs={'slug': self.slug})
     
     def get_proj_url(self):
-        return reverse('core:constructions_page', kwargs={'slug': self.project_name})
+        return reverse('core:constructions_page', kwargs={'slug': self.project})
     
 
     def save(self, *args, **kwargs):

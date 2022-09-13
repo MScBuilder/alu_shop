@@ -6,10 +6,10 @@ from . import models
 class ConstructionForm(forms.ModelForm):
     class Meta:
         model = models.Construction
-        fields = ('project_name', 'category', 'reference_name', 'width', 'height', 'color' )
+        fields = ('project', 'category', 'reference_name', 'width', 'height', 'color' )
         
         labels = {
-            'project_name': "PROJECT",
+            'project': "PROJECT",
             'category': "CATEGORY",
             'reference_name': "REFERENCE",
             'width': "WIDTH",
@@ -18,7 +18,7 @@ class ConstructionForm(forms.ModelForm):
         }
 
         widgets = {
-            'project_name': forms.Select(attrs={'class': 'form-control '}),
+            'project': forms.Select(attrs={'class': 'form-control '}),
             'category': forms.Select(attrs={'class': 'form-control '}),
             'reference_name': forms.TextInput(attrs={'class': 'form-control '}),
             'width': forms.NumberInput(attrs={'class': 'form-control '}),

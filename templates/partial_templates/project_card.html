@@ -14,7 +14,7 @@
       <a href="{{ project.get_absolute_url }}">
         <div class="card-body text-center bg-light ">
         <!--Category & Title-->
-          <h4 class="mb-0 pb-0">{{ project.name }}</h4> 
+          <h4 class="mb-0 pb-0">{{ project.name | title }}</h4> 
           <h4 class="font-weight-bold blue-text pt-3">
             <strong>${{ project.price }}</strong>
           </h4> 

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Constructions{% endblock %}
+{% block title %}Project {{project.name}} {% endblock %}
 
 {% load static %}
 
@@ -39,9 +39,9 @@
                 </button>
               </a>
             </li>
-            <li class="nav-item opt_butt">
+            <li class="nav-item">
                 <div class="dropdown">
-                  <button class="btn btn-primary dropdown-toggle m-0 p-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <button class="btn btn-primary dropdown-toggle mr-2 p-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <h7 class="font-weight-bold">Filetr by category</h7>
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -51,21 +51,7 @@
                     <a class="dropdown-item" href="/constructions_page//SW">Sliding windows</a>
                   </div>
                 </div>
-            </li>
-            <li class="nav-item dropdown ">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Glass
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">U=1,0W/m2K</a></li>
-                <li><a class="dropdown-item" href="#">U=1,1W/m2K</a></li>
-                <li><a class="dropdown-item" href="#">U=0,6W/m2K</a></li>
-                <li><a class="dropdown-item" href="#">U=0,5W/m2K</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">All</a></li>
-              </ul>
-            </li>
-
+              </li>
           </ul>
         </div>
         <!-- Collapsible content -->
@@ -75,11 +61,20 @@
 
       <!--Section: Products v.3-->
       <section class="text-center mb-4">
+        <h2 class="mb-5 font-weight-bold">Project: {{ project.name | title }}</h2>
         <!--Card-->
         <div class="row wow fadeIn">
+          
+          {% if messages %}
+              <ul class="messages">
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
 
-          {% for construction in construction_list %}
-
+          {% for construction in project.construction_project.all %}
+              
             {% include "construction_card.html" %}
 
           {% endfor %}

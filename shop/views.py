@@ -9,6 +9,29 @@ from shop.forms import ConstructionForm, ProjectForm
 class HomeView(TemplateView):
     template_name = 'home_page.html'
 
+class ProjectsView(ListView):
+    model = Project
+    template_name = 'projects_page.html'
+    paginate_by = 8
+
+class CreateProjectView(CreateView):
+    model = Project
+    template_name = 'create_project.html'
+    fields = ['user', 'name']
+
+    def form_valid(self, form):
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            'The project has been created'
+        )
+        return super().form_valid(form)
+
+
+class ProjectDetailView(DetailView):
+    model = Project
+    template_name = 'project_detail.html'
+    
 
 class ConstructionDetailView(DetailView):
     model = Construction
@@ -44,25 +67,6 @@ class ConstructionFormView(FormView):
         form.save()
         return super().form_valid(form)
 
-class ProjectsView(ListView):
-    model = Project
-    template_name = 'projects_page.html'
-    paginate_by = 8
-
-
-class CreateProjectView(CreateView):
-    model = Project
-    template_name = 'create_project.html'
-    fields = ['user', 'name']
-    #success_url = '/projects_page/'
-
-    def form_valid(self, form):
-        messages.add_message(
-            self.request,
-            messages.SUCCESS,
-            'The project has been created'
-        )
-        return super().form_valid(form)
 
 
 def construction_create(request):
