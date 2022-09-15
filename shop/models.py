@@ -1,4 +1,3 @@
-from tkinter import CASCADE
 from django.shortcuts import reverse
 from django.conf import settings
 from django.db import models
@@ -31,11 +30,23 @@ class Construction(models.Model):
     project = models.ForeignKey('Project', on_delete=models.CASCADE, null=False, related_name='construction_project')
     category = models.CharField(choices=CATEGORY_CHOICES, default="FW", max_length=2)
     reference_name = models.CharField(max_length=100)
-    width = models.PositiveIntegerField(default=1000, validators=[width_validator])
-    height = models.PositiveIntegerField(default=1000, validators=[height_validator])
+    width = models.PositiveIntegerField(default=1000)
+    height = models.PositiveIntegerField(default=1000)
     price = models.FloatField(null=True)
     color = models.CharField(choices=COLOR_CHOICES, default="9016", max_length=4)
     slug = models.SlugField(null=True)
+    
+    def clean(self):
+        data = super().clean()
+        category = data.get("category")
+        width = data.get("width")
+        height = data.get("height")
+
+        if category and width:
+            width_validator(category, width)
+
+        if category and height:
+            height_validator(category, height) 
     
     def __str__(self):
         return self.reference_name
@@ -48,7 +59,6 @@ class Construction(models.Model):
     
     def get_proj_url(self):
         return reverse('core:constructions_page', kwargs={'slug': self.project})
-    
 
     def save(self, *args, **kwargs):
         
@@ -59,3 +69,4 @@ class Construction(models.Model):
             fields_to_slug = self.reference_name + "-" + str(self.width) + "-" + str(self.height)
             self.slug = slugify(fields_to_slug)
         return super().save(*args, **kwargs)
+    
