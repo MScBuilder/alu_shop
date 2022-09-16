@@ -14,7 +14,7 @@ def construction_calculate_price(construction):
     return price
 
 def project_calculate_price(project): 
-    price = 0
+    price = 0.0
     constructions = project.construction_project.all()
     for construction in constructions:
             price += construction.price

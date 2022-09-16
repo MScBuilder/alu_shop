@@ -10,7 +10,7 @@ from shop.aluminium_system_info.category_options import CATEGORY_CHOICES
 class Project(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, unique=True ,null=False)
-    price = models.FloatField(default=0, null=True)
+    price = models.FloatField(default=0, null=False)
     slug = models.SlugField(null=True)
     
     def __str__(self):
@@ -25,20 +25,26 @@ class Project(models.Model):
     def get_absolute_url(self):
         return reverse ('core:project_detail', kwargs={'pk': self.pk})
 
-    def save(self, *args, **kwargs):
-        
-        self.price = project_calculate_price(self)
+    def my_callback(sender, **kwargs):
+        print("Request finished!")
     
+    def save(self, *args, **kwargs):
         if not self.slug:
-            fields_to_slug = self.user + "_" + self.name
+            fields_to_slug = f"{self.user} + {self.name}"
             self.slug = slugify(fields_to_slug)
+
+        if self.id:
+            print(f'Project price is: {self.price}')
+            self.price = project_calculate_price(self) 
+            print(f'Project price is: {self.price}')
+            
         return super().save(*args, **kwargs)
 
 
 class Construction(models.Model):
     project = models.ForeignKey('Project', on_delete=models.CASCADE, null=False, related_name='construction_project')
     category = models.CharField(choices=CATEGORY_CHOICES, default="FW", max_length=2)
-    reference_name = models.CharField(max_length=100)
+    reference_name = models.CharField(max_length=100, unique=True)
     width = models.PositiveIntegerField(default=1000)
     height = models.PositiveIntegerField(default=1000)
     price = models.FloatField(null=True)
@@ -68,10 +74,13 @@ class Construction(models.Model):
         if not self.price:
             self.price = construction_calculate_price(self)       
         
-        self.project.save()
-        
         if not self.slug:
             fields_to_slug = self.reference_name + "-" + str(self.width) + "-" + str(self.height)
             self.slug = slugify(fields_to_slug)
-        return super().save(*args, **kwargs)
+        
+        super().save(*args, **kwargs)
+        
+        self.project.save()
+        
+        return 
     
