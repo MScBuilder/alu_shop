@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 
 from shop.models import Construction, Project
-from shop.forms import ConstructionForm, ProjectForm
+from shop.forms import ConstructionForm
 
 class HomeView(TemplateView):
     template_name = 'home_page.html'

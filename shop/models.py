@@ -3,14 +3,14 @@ from django.conf import settings
 from django.db import models
 from django.template.defaultfilters import slugify
 from .validators import width_validator, height_validator
-from .aluminium_system_info.price_calculations import calculate_price
+from .aluminium_system_info.price_calculations import construction_calculate_price, project_calculate_price
 from shop.aluminium_system_info.color_options import COLOR_CHOICES
 from shop.aluminium_system_info.category_options import CATEGORY_CHOICES
 
 class Project(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, unique=True ,null=False)
-    price = models.FloatField(null=True)
+    price = models.FloatField(default=0, null=True)
     slug = models.SlugField(null=True)
     
     def __str__(self):
@@ -24,6 +24,15 @@ class Project(models.Model):
     
     def get_absolute_url(self):
         return reverse ('core:project_detail', kwargs={'pk': self.pk})
+
+    def save(self, *args, **kwargs):
+        
+        self.price = project_calculate_price(self)
+    
+        if not self.slug:
+            fields_to_slug = self.user + "_" + self.name
+            self.slug = slugify(fields_to_slug)
+        return super().save(*args, **kwargs)
 
 
 class Construction(models.Model):
@@ -57,7 +66,9 @@ class Construction(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.price:
-            self.price = calculate_price(self)
+            self.price = construction_calculate_price(self)       
+        
+        self.project.save()
         
         if not self.slug:
             fields_to_slug = self.reference_name + "-" + str(self.width) + "-" + str(self.height)
