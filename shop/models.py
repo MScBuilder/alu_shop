@@ -37,16 +37,11 @@ class Construction(models.Model):
     slug = models.SlugField(null=True)
     
     def clean(self):
-        data = super().clean()
-        category = data.get("category")
-        width = data.get("width")
-        height = data.get("height")
+        if self.category and self.width:
+            width_validator(self.category, self.width)
 
-        if category and width:
-            width_validator(category, width)
-
-        if category and height:
-            height_validator(category, height) 
+        if self.category and self.height:
+            height_validator(self.category, self.height) 
     
     def __str__(self):
         return self.reference_name
@@ -61,7 +56,6 @@ class Construction(models.Model):
         return reverse('core:constructions_page', kwargs={'slug': self.project})
 
     def save(self, *args, **kwargs):
-        
         if not self.price:
             self.price = calculate_price(self)
         
