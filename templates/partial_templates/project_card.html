@@ -1,26 +1,44 @@
 {% load static %}
 
-<div class="col-lg-3 col-md-6 mb-4">
-    <div class="card">
-      <!--Card image-->
-      <div class="view overlay">
-        <img src="{% static 'img/jpg/project.jpg' %}" class="card-img-top" alt="">
-        <div class="card-img-overlay">
-          <a href="{{ project.get_update_url }}" class="btn btn-lg btn-danger p-1 pl-2 pr-2 float-right ">UPDATE</a>
+<!--
+  <div class="col-lg-3 col-md-6 mb-4">
+      <div class="card">
+        <div class="view overlay">
+          <img src="{% static 'img/jpg/project.jpg' %}" class="card-img-top" alt="">
+          <div class="card-img-overlay">
+            <a href="{{ project.get_update_url }}" class="btn btn-lg btn-danger p-1 pl-2 pr-2 float-right ">UPDATE</a>
+          </div>
         </div>
-      </div>
-      <!--Card image-->
-      <!--Card content-->
-      <a href="{{ project.get_absolute_url }}">
-        <div class="card-body text-center bg-light ">
-        <!--Category & Title-->
-          <h4 class="mb-0 pb-0">{{ project.name | title }}</h4> 
-          <h4 class="font-weight-bold blue-text pt-3">
-            <strong>${{ project.price }}</strong>
-          </h4> 
-        </div>
-      </a>
-      <!--Card content-->
+        <a href="{{ project.get_absolute_url }}">
+          <div class="card-body text-center bg-light ">
+            <h4 class="mb-0 pb-0">{{ project.name | title }}</h4> 
+            <h4 class="font-weight-bold blue-text pt-3">
+              <strong>${{ project.price }}</strong>
+            </h4> 
+          </div>
+        </a>
+      </div> 
+  </div>
+-->
+<div class="container">
+  <div class="row my-2 py-2 border border-light rounded">
+    <div class="col-md-auto">
+      <img src="{% static 'img/jpg/project.jpg' %}" style="height: 100px" class="img-fluid" alt="Responsive image">   
+    </div>
 
-    </div> 
+    <div class="col-sm border-left border-right d-flex align-items-stretch">
+      <a class="d-flex justify-content-center align-items-center" style="width: 100%" href="{{ project.get_absolute_url }}">
+        <h5 class="font-weight-bold">{{ project.name | title }} Project</h5>
+      </a>
+    </div>
+
+    <div class="col-md-auto d-flex justify-content-center align-items-center border-right">
+      <strong class="text-danger font-weight-bold">Total price: <br> ${{ project.price }}</strong>
+    </div>
+
+    <div class="col-md-auto d-flex justify-content-center align-items-center">
+        <a href="{{ project.get_update_url }}" class="btn btn-sm btn-danger ">UPDATE</a>
+    </div>
+
+  </div>
 </div>
