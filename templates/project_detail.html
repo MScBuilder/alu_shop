@@ -73,6 +73,12 @@
               </ul>
             {% endif %}
 
+          {% if submitted %}
+        
+            <p>New construction created successfully!</p>
+
+          {% endif %}
+
           {% for construction in project.construction_project.all %}
               
             {% include "construction_card.html" %}

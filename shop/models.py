@@ -24,20 +24,15 @@ class Project(models.Model):
     
     def get_absolute_url(self):
         return reverse ('core:project_detail', kwargs={'pk': self.pk})
-
-    def my_callback(sender, **kwargs):
-        print("Request finished!")
     
     def save(self, *args, **kwargs):
         if not self.slug:
-            fields_to_slug = f"{self.user} + {self.name}"
+            fields_to_slug = self.name
             self.slug = slugify(fields_to_slug)
 
         if self.id:
-            print(f'Project price is: {self.price}')
             self.price = project_calculate_price(self) 
-            print(f'Project price is: {self.price}')
-            
+
         return super().save(*args, **kwargs)
 
 
@@ -68,7 +63,7 @@ class Construction(models.Model):
         return reverse('core:construction_detail_view', kwargs={'slug': self.slug})
     
     def get_proj_url(self):
-        return reverse('core:constructions_page', kwargs={'slug': self.project})
+        return reverse('core:project_detail', kwargs={'pk': self.project.id})
 
     def save(self, *args, **kwargs):
         if not self.price:

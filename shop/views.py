@@ -61,13 +61,11 @@ class ConstructionFormView(FormView):
     model = Construction
     template_name = 'update_construction.html'
     form_class = ConstructionForm
-    success_url = '/constructions_page/'
+    success_url = '/projects_page/'
 
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
-
-
 
 def construction_create(request):
     submitted = False
@@ -75,7 +73,8 @@ def construction_create(request):
         form = ConstructionForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/create_construction?submitted=True')
+            proj_id = form.cleaned_data['project'].id
+            return HttpResponseRedirect(f'/project_detail/{proj_id}?submitted=True')  
     else:
         form = ConstructionForm
         if 'submitted' in request.GET:
@@ -86,3 +85,17 @@ def construction_create(request):
 
 def checkout_page(request):
     return render (request, 'checkout_page.html', {})
+
+class CreateConstructionView(CreateView):
+    model = Construction
+    template_name = 'crate_construction.html'
+    fields = [ ]
+    
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object(queryset=Project.objects.all())
+        return super().get(request, *args, **kwargs)
+    
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object(queryset=Project.objects.all())
+        return super().post(request, *args, **kwargs)
+

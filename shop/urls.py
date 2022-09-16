@@ -21,8 +21,7 @@ urlpatterns = [
     path('projects_page/', ProjectsView.as_view(), name='projects_page'),
     path('project_detail/<int:pk>', ProjectDetailView.as_view(), name='project_detail'),
     path('create_construction/', construction_create),
-    path('constructions_page/<slug>/<str:category>', ConstructionsCategoryView.as_view(), name='category_page'),
-    path('construction_detail_view.html/<str:slug>', ConstructionDetailView.as_view(), name='construction_detail_view'),
+    path('construction_detail_view/<str:slug>', ConstructionDetailView.as_view(), name='construction_detail_view'),
     path('update_construction/<int:id>', ConstructionFormView.as_view(), name='update_construction'),
     path('update_project/<int:id>', ConstructionFormView.as_view(), name='update_project'),
     path('checkout_page/', checkout_page)
