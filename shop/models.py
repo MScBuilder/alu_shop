@@ -23,7 +23,7 @@ class Project(models.Model):
         return reverse('core:constructions_page', kwargs={'slug': self.name})
     
     def get_absolute_url(self):
-        return reverse ('core:project_detail', kwargs={'pk': self.pk})
+        return reverse ('core:project_detail', kwargs={'pk': self.pk, 'category': 'all'})
     
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -60,10 +60,10 @@ class Construction(models.Model):
         return reverse('core:update_construction', args=[str(self.id)])
         
     def get_slug_url(self):
-        return reverse('core:construction_detail_view', kwargs={'slug': self.slug})
+        return reverse('core:construction_detail_view', kwargs={'pk': int(self.project.id), 'slug': self.slug})
     
     def get_proj_url(self):
-        return reverse('core:project_detail', kwargs={'pk': self.project.id})
+        return reverse('core:project_detail', kwargs={'pk': self.project.id, 'category': 'all'})
 
     def save(self, *args, **kwargs):
         if not self.price:

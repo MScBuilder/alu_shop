@@ -45,10 +45,10 @@
                     <h7 class="font-weight-bold">Filetr by category</h7>
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="">ALL</a>
-                    <a class="dropdown-item" href="/constructions_page//FW">Fix windows</a>
-                    <a class="dropdown-item" href="/constructions_page//CW">Casment windows</a>
-                    <a class="dropdown-item" href="/constructions_page//SW">Sliding windows</a>
+                    <a class="dropdown-item" href="/project_detail/{{ project_id }}/all">ALL</a>
+                    <a class="dropdown-item" href="/project_detail/{{ project_id }}/FW">Fix windows</a>
+                    <a class="dropdown-item" href="/project_detail/{{ project_id }}/CW">Casment windows</a>
+                    <a class="dropdown-item" href="/project_detail/{{ project_id }}/SW">Sliding windows</a>
                   </div>
                 </div>
               </li>
@@ -79,7 +79,7 @@
 
           {% endif %}
 
-          {% for construction in project.construction_project.all %}
+          {% for construction in object_list %}
               
             {% include "construction_card.html" %}
 
