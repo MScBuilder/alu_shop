@@ -8,22 +8,17 @@
 <div class="container pt-5">
     <center >
         <h1 class="pt-5">Create new construction</h1>
-        {% if submitted %}
-        
-            New construction created successfully!
-
-        {% else %}
-
         <form action="."  method="POST">
+            <p>
+                <label for="id_width" class="active">PROJECT:</label>
+                <input type="text" name="project" value="{{ construction.project }}"  disabled class="form-control" min="0" required="" id="id_project"> 
+            </p>
             {% csrf_token %}
             
             {{ form.as_p }}
             
             <button type="submit" class="btn btn-primary btn-lg fw-bold fs-2" > Submit </button>
         </form>
-        
-        {% endif %}
-
     </center>
 </div>
 

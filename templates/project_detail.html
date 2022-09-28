@@ -33,7 +33,7 @@
               </a>
             </li>
             <li class="nav-item active">
-              <a href="/create_construction">
+              <a href="/create_construction/{{ project_id }}">
                 <button class="btn btn-danger mr-2 p-2" type="button" >
                   <h7 class="font-weight-bold">+ NEW CONSTRUCTION</h7>
                 </button>
@@ -61,7 +61,7 @@
 
       <!--Section: Products v.3-->
       <section class="text-center mb-4">
-        <h2 class="mb-5 font-weight-bold">Project: {{ project.name | title }}</h2>
+        <h2 class="mb-5 font-weight-bold">Project: {{ project_name | title }}</h2>
         <!--Card-->
         <div class="row wow fadeIn">
           

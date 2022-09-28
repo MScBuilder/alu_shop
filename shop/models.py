@@ -55,13 +55,15 @@ class Construction(models.Model):
     
     def __str__(self):
         return self.reference_name
-    
-    def get_id_url(self):
-        return reverse('core:update_construction', args=[str(self.id)])
         
     def get_slug_url(self):
-        return reverse('core:construction_detail_view', kwargs={'pk': int(self.project.id), 'slug': self.slug})
+        #return reverse('core:construction_detail_view', kwargs={'pk': int(self.project.id), 'slug': self.slug})
+        return reverse('core:update_construction', kwargs={'pk': int(self.project.id), 'slug': self.slug})
     
+    def get_absolute_url(self):
+        #return reverse('core:construction_detail_view', kwargs={'pk': int(self.project.id), 'slug': self.slug})
+        return reverse('core:update_construction', kwargs={'pk': int(self.project.id), 'slug': self.slug})
+
     def get_proj_url(self):
         return reverse('core:project_detail', kwargs={'pk': self.project.id, 'category': 'all'})
 

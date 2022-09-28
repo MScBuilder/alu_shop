@@ -30,6 +30,10 @@
           <!--Content-->
           <form class="justify-content-left" action="."  method="PUT">
             <!-- Default input --> 
+            <p>
+              <label for="id_width" class="active">PROJECT:</label>
+              <input type="text" name="project" value="{{ construction.project }}"  disabled class="form-control" min="0" required="" id="id_project"> 
+            </p>
             {% csrf_token %}
             {{form.as_p}}
             <button class="btn btn-primary btn-md my-0 p" type="submit">

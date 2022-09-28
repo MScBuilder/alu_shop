@@ -30,6 +30,13 @@
           <!--Content-->
           <div class="p-4 h-100">
             <div >
+              {% if messages %}
+              <ul class="messages">
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
               <h1> Details: </h1>
               <ul>
                 <li><h3>Reference: "{{construction.reference_name}}"</h3></li>
@@ -45,7 +52,7 @@
                   UPDATE
                 </h4>
               </a>
-              <a href="{{ construction.get_proj_url }}" class="btn btn-lg btn-info">
+              <a href="{{ construction.get_absolute_url }}" class="btn btn-lg btn-info">
                 <h4 class="mb-0 font-weight-bold">
                   &#8592; BACK
                 </h4>
