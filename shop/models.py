@@ -25,6 +25,9 @@ class Project(models.Model):
     def get_absolute_url(self):
         return reverse ('core:project_detail', kwargs={'pk': self.pk, 'category': 'all'})
     
+    def get_delete_url(self):
+        return reverse ('core:project_delete', kwargs={'pk': self.pk})
+
     def save(self, *args, **kwargs):
         if not self.slug:
             fields_to_slug = self.name
@@ -51,33 +54,28 @@ class Construction(models.Model):
             width_validator(self.category, self.width)
 
         if self.category and self.height:
-            height_validator(self.category, self.height) 
+            height_validator(self.category, self.height)
+            
+        super().clean(self)
+        return
     
     def __str__(self):
         return self.reference_name
         
-    def get_slug_url(self):
-        #return reverse('core:construction_detail_view', kwargs={'pk': int(self.project.id), 'slug': self.slug})
-        return reverse('core:update_construction', kwargs={'pk': int(self.project.id), 'slug': self.slug})
-    
     def get_absolute_url(self):
-        #return reverse('core:construction_detail_view', kwargs={'pk': int(self.project.id), 'slug': self.slug})
         return reverse('core:update_construction', kwargs={'pk': int(self.project.id), 'slug': self.slug})
 
     def get_proj_url(self):
         return reverse('core:project_detail', kwargs={'pk': self.project.id, 'category': 'all'})
 
-    def save(self, *args, **kwargs):
-        if not self.price:
-            self.price = construction_calculate_price(self)       
-        
+    def save(self, *args, **kwargs):       
         if not self.slug:
             fields_to_slug = self.reference_name + "-" + str(self.width) + "-" + str(self.height)
-            self.slug = slugify(fields_to_slug)
-        
+            self.slug = slugify(fields_to_slug)       
+        if not self.price:
+            self.price = construction_calculate_price(self)       
+
         super().save(*args, **kwargs)
-        
         self.project.save()
-        
         return 
     

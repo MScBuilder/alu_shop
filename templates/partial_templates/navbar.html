@@ -22,16 +22,22 @@
             <span class="sr-only">(current)</span>
           </a>
         </li>
+        {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="/profile_page" target="_self">Profile</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link waves-effect" href="/checkout_page" target="_self">Checkout</a>
         </li>
         <li class="nav-item">
           <a class="nav-link waves-effect" href="/projects_page" target="_self">Projects</a>
         </li>
+        {% endif %}
       </ul>
 
       <!-- Right -->
       <ul class="navbar-nav nav-flex-icons">
+      <!--
         <li class="nav-item">
           <a class="nav-link waves-effect">
             <span class="badge red z-depth-1 mr-1"> 1 </span>
@@ -44,18 +50,34 @@
             <i class="fab fa-twitter"></i>
           </a>
         </li>
+      -->
         <li class="nav-item">
           <a href="https://github.com/MScBuilder/alu_shop" class="nav-link border border-light rounded waves-effect"
             target="_blank">
             <i class="fab fa-github mr-2"></i>MScBuilder GitHub
           </a>
         </li>
+      {% if request.user.is_authenticated %}
         <li class="nav-item">
-          <a href="{% url 'account_login' %}" class="nav-link border border-light rounded waves-effect"
-            target="_blank">
-            <i class="bi bi-person-circle"></i> LogIn
+          <a href="{% url 'account_logout' %}" class="nav-link border border-light rounded waves-effect"
+          target="_blank">
+          <i class="bi bi-door-open-fill"></i> LogOut
           </a>
         </li>
+      {% else %}
+        <li class="nav-item">
+          <a href="{% url 'account_login' %}" class="nav-link border border-light rounded waves-effect"
+          target="_blank">
+          <i class="bi bi-person-circle"></i> LogIn
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'account_signup' %}" class="nav-link border border-light rounded waves-effect"
+          target="_blank">
+          <i class="bi bi-person-plus-fill"></i> SignUp
+          </a>
+        </li>
+      {% endif %}
       </ul>
 
     </div>

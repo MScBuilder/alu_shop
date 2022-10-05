@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Project {{project.name}} {% endblock %}
+
+{% load static %}
+
+{% block content %}
+<!--Main layout-->
+<main class="header_space">
+    <div class="container">
+
+      <!--Navbar-->
+      <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5">
+
+        <!-- Navbar brand -->
+        <span class="navbar-brand"></span>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a href="/projects_page">
+                <button class="btn btn-info mr-2 p-2" href="/projects_page">
+                  <h7 class="font-weight-bold">&#8592; Back to Projects</h7>
+                </button>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Collapsible content -->
+
+      </nav>
+      <!--/.Navbar-->
+
+      <!--Section: Products v.3-->
+      <section class="text-center mb-4">
+        <form action="."  method="POST"> 
+          {% csrf_token %}     
+          <h2 class="mb-5 font-weight-bold">Are you sure you want to delete this project: {{ project_name | title }}</h2>
+          <button  class="btn btn-danger btn-lg fw-bold fs-2" > DELETE </button>
+          <a href="/projects_page" class="btn btn-info btn-lg fw-bold fs-2" > CANCEL </a>
+        </form>
+    </div>
+</main>
+<!--Main layout-->
+{% endblock content %}s

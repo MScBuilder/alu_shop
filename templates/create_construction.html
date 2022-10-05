@@ -11,7 +11,7 @@
         <form action="."  method="POST">
             <p>
                 <label for="id_width" class="active">PROJECT:</label>
-                <input type="text" name="project" value="{{ construction.project }}"  disabled class="form-control" min="0" required="" id="id_project"> 
+                <input type="text" name="project" value="{{ project_name }}"  disabled class="form-control" min="0" required="" id="id_project"> 
             </p>
             {% csrf_token %}
             

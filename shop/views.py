@@ -1,7 +1,8 @@
 from django.http import Http404
-from django.core.exceptions import ImproperlyConfigured
+from django.urls import reverse_lazy
+from django.shortcuts import reverse
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, DetailView, UpdateView, DetailView, CreateView, TemplateView
+from django.views.generic import ListView, DetailView, DetailView, UpdateView, DetailView, CreateView, TemplateView, DeleteView
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 
@@ -16,10 +17,16 @@ class ProjectsView(ListView):
     template_name = 'projects_page.html'
     paginate_by = 8
 
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        print(f"Project list context: {context}")
+        return context
+
 class CreateProjectView(CreateView):
     model = Project
     template_name = 'create_project.html'
     form_class = ProjectForm
+
 
     def form_valid(self, form):
         messages.add_message(
@@ -38,10 +45,9 @@ class EditProjectView(UpdateView):
         messages.add_message(
             self.request,
             messages.SUCCESS,
-            'The project has been created'
+            'The project has been changed'
         )
         return super().form_valid(form)
-
 
 class ProjectDetailView(ListView):
     template_name = 'project_detail.html'
@@ -58,7 +64,13 @@ class ProjectDetailView(ListView):
         context = super().get_context_data(**kwargs)
         project= Project.objects.get(id=self.kwargs.get('pk'))
         context.update({'project_id':project.id, 'project_name':project.name})
+        print(f"List context: {context}")
         return context
+
+class ProjectDeleteView(DeleteView):
+    model = Project
+    template_name = 'project_delete.html'
+    success_url = reverse_lazy("home")
 
 class ConstructionDetailView(DetailView):
     model = Construction
@@ -66,7 +78,6 @@ class ConstructionDetailView(DetailView):
     
     #Changing the get_object() method to first look by the "slug" and then by "pk"
     def get_object(self, queryset=None):
-        # like DateDetailView
         if queryset is None:
             queryset = self.get_queryset()
         # Next, try looking up by primary key.
@@ -130,14 +141,16 @@ class ConstructionFormView(UpdateView):
                         {'verbose_name': queryset.model._meta.verbose_name})
         return obj 
 
-
-
 class CreateConstructionView(CreateView):
     model = Construction
-    template_name = 'crate_construction.html'
+    template_name = 'create_construction.html'
     form_class = ConstructionForm
-    success_url = '/project_detail/1/all/'
-    print(success_url)
+    
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        project= Project.objects.get(id=self.kwargs.get('pk'))
+        context.update({'project_name':project.name})
+        return context
     
     def form_valid(self, form):
         messages.add_message(
@@ -148,16 +161,10 @@ class CreateConstructionView(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        if self.success_url:
-            url = '/project_detail/1/all/'
-        else:
-            try:
-                url = self.object.get_absolute_url()
-            except AttributeError:
-                raise ImproperlyConfigured(
-                    "No URL to redirect to.  Either provide a url or define"
-                    " a get_absolute_url method on the Model.")
-        return url
+        return reverse_lazy('core:update_construction', kwargs={'pk': int(self.project.id), 'slug': self.slug})
+
+class UserDetailView(DetailView):
+    pass
 
 def construction_create(request, **kwargs):
     submitted = False
